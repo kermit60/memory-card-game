@@ -1,0 +1,44 @@
+h1 {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.card > div {
+  font-size: 30px;
+}
+
+.card:hover {
+  transition: transform 0.2s ease-in-out;
+  transform: scale(1.03);
+}
+
+.cardPhoto {
+  width: 200px;
+}
+
+body {
+  background: rgb(35, 170, 170);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  text-align: center;
+}
+
+.scoreboard {
+  font-size: 50px;
+  color: white;
+}
