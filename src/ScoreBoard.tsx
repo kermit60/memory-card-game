@@ -1,8 +1,8 @@
-function ScoreBoard ( { score }: { score: number } ){
+function ScoreBoard ( { text, score }: { text: string, score: number } ){
   return (
     <>
       <div className="scoreboard">
-        Score: {score}
+        {text}{score}
       </div>
     </>
   )

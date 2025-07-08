@@ -10,16 +10,18 @@ interface PokemonData {
 }
 
 function App() {
-
+  
   const [scoreboard, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [pokemons, setData] = useState<PokemonData[] |[]>([]);
+  const [staticPokemons, setStaticPokemons] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=8&offset=${Math.random() * 250}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=12&offset=${Math.random() * 250}`)
     .then(response => response.json())
     .then(data => {
-      getPokemonData(data.results)
-      return data.results
+      getPokemonData(data.results);
+      return data.results;
     });
   }, [])
 
@@ -38,9 +40,17 @@ function App() {
   }
 
   // shuffles the pokemon order and increment score
-  const clickEvent = () => {
+  const clickEvent = (name: string) => {
+    if (staticPokemons.includes(name)) {
+      staticPokemons.splice(staticPokemons.indexOf(name), 1)
+      setStaticPokemons(staticPokemons);
+      setScore(scoreboard + 1);
+      setHighScore(Math.max(scoreboard + 1, highScore));
+    } else {
+      setScore(0);
+      setStaticPokemons(pokemons.map((pokemon) => pokemon.name));
+    }
     setData(shuffle([...pokemons]));
-    setScore(scoreboard + 1);
   }
 
   const getPokemonData = async ( pokemonsList: PokemonData[] ) => {
@@ -55,12 +65,14 @@ function App() {
     }
     console.log(newArr);
     setData(newArr);
+    setStaticPokemons(newArr.map((pokemon) => pokemon.name));
   }
 
   return (
     <>
       <h1>Memory Card game</h1>
-      <ScoreBoard score={scoreboard}/>
+      <ScoreBoard text="Current Score: " score={scoreboard}/>
+      <ScoreBoard text="High Score: " score={highScore}/>
       <div className='layout'>
         {
           pokemons.map((pokemon) => {

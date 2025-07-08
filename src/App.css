@@ -7,6 +7,8 @@ h1 {
 .card {
   display: flex;
   flex-direction: column;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 9px;
   align-items: center;
   background-color: white;
   border-radius: 7px;
@@ -36,6 +38,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   text-align: center;
+  padding: 20px;
 }
 
 .scoreboard {
